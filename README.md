@@ -13,9 +13,10 @@ This guide will help you set up your new Windows installation with performance o
     - [Registry Tweaks](#registry-tweaks)
     - [PowerShell Scripts](#powershell-scripts)
 4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)
-5. [Additional Resources](#additional-resources)
-6. [Notes](#notes)
-7. [Conclusion](#conclusion)
+5. [ROG Laptop Optimization](#rog-laptop-optimization)
+6. [Additional Resources](#additional-resources)
+7. [Notes](#notes)
+8. [Conclusion](#conclusion)
 
 ---
 
