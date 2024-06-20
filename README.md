@@ -1,31 +1,68 @@
-# Steps
- - offline install
- - latest nvidia drivers
- - winaero tweaker
- - https://github.com/hellzerg/optimizer/releases
- - https://wpd.app
- - power optimisation 
- - bind left shift
+# 🖥️ New Laptop Setup Guide
 
-# References
- - https://www.reddit.com/r/OptimizedGaming/comments/su6cq7/windows_1011_optimization_guide/
- 
-# Power registry
- - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Contro l\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\be337238-0d82-4146-a960-4f3749d470c7 and select Attributes. Modify the value of "Attributes" from 1 to 2. Data should read “0x00000002 (2)
- 
- - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\75b0ae3f-bce0-45a7-8c89-c9611c25e100 and select Attributes. Modify the value of "Attributes" from 1 to 2. Data should read “0x00000002 (2)
- 
-# Add Power registry
- - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings and create Attributes. Modify the value of "Attributes" from 1 to 2. Data should read “0x00000002 (2)
- 
- # Power powershell
-  - REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\893dee8e-2bef-41e0-89c6-b55d0929964c /v Attributes /t REG_DWORD /d 2 /f
-  
-  - REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\bc5038f7-23e0-4960-96da-33abaf5935ec /v Attributes /t REG_DWORD /d 2 /f
-  
-# Notes
-Powershell 
- - make .ps1 files openable with powershell
-  - - https://www.top-password.com/blog/set-ps1-script-to-open-with-powershell-by-default/
- - allow scripts: Set-ExecutionPolicy -ExecutionPolicy Unrestricted
-   
+This guide will help you set up your new Windows installation with performance optimization, de-bloating, and privacy-first tools.
+
+---
+
+## 📋 Table of Contents
+
+1. [Initial Setup](#initial-setup)
+2. [Essential Tools](#essential-tools)
+3. [System Tweaks](#system-tweaks)
+    - [Power Optimization](#power-optimization)
+    - [Registry Tweaks](#registry-tweaks)
+    - [PowerShell Scripts](#powershell-scripts)
+4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)
+5. [Additional Resources](#additional-resources)
+6. [Notes](#notes)
+7. [Conclusion](#conclusion)
+
+---
+
+## Initial Setup
+
+1. **Offline Install**: Perform an offline installation of Windows to avoid unwanted pre-installed software.
+2. **Update Windows**: Ensure your Windows installation is up to date by checking for updates.
+
+---
+
+## Essential Tools
+
+1. **Nvidia Drivers**: Download and install the latest Nvidia drivers from the [official website](https://www.nvidia.com/Download/index.aspx).
+2. **Winaero Tweaker**: A powerful tool to customize and tweak Windows. Download from [here](https://winaero.com/winaero-tweaker/).
+3. **Optimizer**: A comprehensive tool to enhance performance and privacy. Get it from [Optimizer](https://github.com/hellzerg/optimizer/releases).
+4. **WPD (Windows Privacy Dashboard)**: Use WPD to control Windows privacy settings. Available at [WPD](https://wpd.app).
+
+---
+
+## System Tweaks
+
+### Power Optimization
+
+1. **Modify Power Settings**: Open `Control Panel > Hardware and Sound > Power Options`.
+2. **Select High Performance**: Choose the High Performance power plan for better performance.
+3. **Customize Advanced Power Settings**:
+    - Set hard disk to turn off after 0 minutes.
+    - Set sleep options to Never.
+    - Adjust processor power management to 100%.
+
+### Registry Tweaks
+
+#### Modify Existing Registry Entries
+
+1. **Enable Additional Power Settings**
+    ```reg
+    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\be337238-0d82-4146-a960-4f3749d470c7
+    ```
+    Modify the value of "Attributes" from `1` to `2`. Data should read `0x00000002 (2)`.
+
+2. **Enable Processor Idle Demote**
+    ```reg
+    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\75b0ae3f-bce0-45a7-8c89-c9611c25e100
+    ```
+    Modify the value of "Attributes" from `1` to `2`. Data should read `0x00000002 (2)`.
+
+#### Add New Registry Entries
+
+```reg
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings
