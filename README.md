@@ -22,7 +22,7 @@ This guide will help you set up your new Windows installation with performance o
 
 ## Initial Setup
 
-1. **Offline Install**: Perform an offline installation of Windows to avoid unwanted pre-installed software.
+1. **Offline Install**: Because I don't like to tie MS account to my laptop.
 2. **Update Windows**: Ensure your Windows installation is up to date by checking for updates.
 
 ---
@@ -41,8 +41,7 @@ This guide will help you set up your new Windows installation with performance o
 ### Power Optimization
 
 1. **Modify Power Settings**: Open `Control Panel > Hardware and Sound > Power Options`.
-2. **Select High Performance**: Choose the High Performance power plan for better performance.
-3. **Customize Advanced Power Settings**:
+2. **Customize Advanced Power Settings**:
     - Set hard disk to turn off after 0 minutes.
     - Set sleep options to Never.
     - Adjust processor power management to 100%.
