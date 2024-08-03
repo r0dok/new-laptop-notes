@@ -66,3 +66,6 @@ This guide will help you set up your new Windows installation with performance o
 
 ```reg
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings
+
+## 📋 **References**
+1.https://www.reddit.com/r/OptimizedGaming/comments/su6cq7/windows_1011_optimization_guide/
