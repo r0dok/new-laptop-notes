@@ -43,7 +43,7 @@ This guide will help you set up your new Windows installation with performance o
 1. **Modify Power Settings**: Open `Control Panel > Hardware and Sound > Power Options`.
 2. **Customize Advanced Power Settings**:
     - Set hard disk to turn off after 0 minutes.
-    - (optional for desktops or if you don't move around too much )Set sleep options to Never.
+    - (optional for desktops or if you don't move around too much) Set sleep options to Never.
     - Adjust processor power management to 100% while plugged in.
 
 ### Registry Tweaks
@@ -66,6 +66,3 @@ This guide will help you set up your new Windows installation with performance o
 
 ```reg
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings
-
-## 📋 **References**
-1.https://www.reddit.com/r/OptimizedGaming/comments/su6cq7/windows_1011_optimization_guide/
