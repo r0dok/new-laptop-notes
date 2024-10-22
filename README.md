@@ -1,7 +1,5 @@
 # 🖥️ New Laptop Setup Guide
 
-This guide will help you set up your new Windows installation with performance optimization, de-bloating, and privacy-first tools.
-
 ---
 
 ## 📋 Table of Contents
@@ -10,16 +8,17 @@ This guide will help you set up your new Windows installation with performance o
 2. [Essential Tools](#essential-tools)
 3. [System Tweaks](#system-tweaks)
 4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)
-5. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)
-6. [Additional Resources](#additional-resources)
-7. [Notes](#notes)
-8. [Conclusion](#conclusion)
+5. [ROG Laptop Optimization with G-Helper](#rog-laptop-optimization-with-g-helper)
+6. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)
+7. [Additional Resources](#additional-resources)
+8. [Notes](#notes)
+9. [Conclusion](#conclusion)
 
 ---
 
 ## Initial Setup
 
-1. **Offline Install**: Avoid using an MS account by doing an offline installation.
+1. **Offline Install**: Avoid using an MS account by doing an offline installation. Also use Rufus for easier installation
 2. **Update Windows**: Ensure your Windows installation is up to date by checking for updates.
 
 ---
@@ -30,6 +29,7 @@ This guide will help you set up your new Windows installation with performance o
 2. **Winaero Tweaker**: A powerful tool to customize and tweak Windows. Download from [here](https://winaero.com/winaero-tweaker/).
 3. **Optimizer**: A comprehensive tool to enhance performance and privacy. Get it from [Optimizer](https://github.com/hellzerg/optimizer/releases).
 4. **WPD (Windows Privacy Dashboard)**: Use WPD to control Windows privacy settings. Available at [WPD](https://wpd.app).
+5. **GlassWire**: A network monitoring tool to detect suspicious activity. Get it [here](https://www.glasswire.com).
 
 ---
 
@@ -57,6 +57,22 @@ To remove bloatware and enhance privacy, use the following tools:
 
 ---
 
+## ROG Laptop Optimization with G-Helper
+
+ROG laptops often come with **Armoury Crate**, which can be resource-heavy and intrusive. You can switch to **G-Helper** for better control and efficiency without the bloat.
+
+1. **Download G-Helper**: Get it from the [official G-Helper GitHub page](https://github.com/seerge/g-helper).
+2. **Install G-Helper**: Follow the instructions on the GitHub page to replace Armoury Crate and take control of your laptop’s performance settings.
+3. **Optimize Performance Profiles**:
+   - Use G-Helper to switch between performance, balanced, and silent modes.
+   - Control fan speed and monitor CPU/GPU temperatures more efficiently.
+4. **Disable Armoury Crate Services**:
+   - Go to `Services.msc` and disable any Armoury Crate-related services to prevent conflicts with G-Helper.
+  
+G-Helper offers a lightweight alternative to manage your ROG laptop’s performance without unnecessary overhead.
+
+---
+
 ## Obtain IoT Enterprise License
 
 To upgrade your Windows to an IoT Enterprise edition, follow the instructions to obtain a license using [massgrave.dev](https://massgrave.dev/windows_ltsc_links).
@@ -64,8 +80,6 @@ To upgrade your Windows to an IoT Enterprise edition, follow the instructions to
 1. Visit the website [massgrave.dev](https://massgrave.dev/windows_ltsc_links).
 2. Choose the IoT Enterprise edition of Windows.
 3. Follow the instructions on the page to obtain a valid IoT license key.
-
-This license will give you better control over updates and privacy settings compared to the standard editions of Windows.
 
 ---
 
@@ -80,8 +94,8 @@ For further customization and optimizations, explore these tools:
 
 ## Notes
 
-- Keep your system regularly updated for security improvements.
-- Always create restore points before applying significant changes to your system.
+- For the love of God, please keep your stuff upgraded
 
 ---
 
+## Conclusion
