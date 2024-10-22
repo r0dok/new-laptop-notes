@@ -9,11 +9,8 @@ This guide will help you set up your new Windows installation with performance o
 1. [Initial Setup](#initial-setup)
 2. [Essential Tools](#essential-tools)
 3. [System Tweaks](#system-tweaks)
-    - [Power Optimization](#power-optimization)
-    - [Registry Tweaks](#registry-tweaks)
-    - [PowerShell Scripts](#powershell-scripts)
 4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)
-5. [ROG Laptop Optimization](#rog-laptop-optimization)
+5. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)
 6. [Additional Resources](#additional-resources)
 7. [Notes](#notes)
 8. [Conclusion](#conclusion)
@@ -22,7 +19,7 @@ This guide will help you set up your new Windows installation with performance o
 
 ## Initial Setup
 
-1. **Offline Install**: Because I don't like to tie MS account to my laptop.
+1. **Offline Install**: Avoid using an MS account by doing an offline installation.
 2. **Update Windows**: Ensure your Windows installation is up to date by checking for updates.
 
 ---
@@ -38,31 +35,53 @@ This guide will help you set up your new Windows installation with performance o
 
 ## System Tweaks
 
-### Power Optimization
+1. **Adjust Power Settings**: Modify power plans for performance or battery longevity.
+2. **Remove Unnecessary Startup Items**: Disable startup programs via `Task Manager > Startup` for a faster boot.
 
-1. **Modify Power Settings**: Open `Control Panel > Hardware and Sound > Power Options`.
-2. **Customize Advanced Power Settings**:
-    - Set hard disk to turn off after 0 minutes.
-    - (optional for desktops or if you don't move around too much) Set sleep options to Never.
-    - Adjust processor power management to 100% while plugged in.
+---
 
-### Registry Tweaks
+## De-bloat and Privacy Tools
 
-#### Modify Existing Registry Entries
+To remove bloatware and enhance privacy, use the following tools:
 
-1. **Enable Additional Power Settings**
-    ```reg
-    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\be337238-0d82-4146-a960-4f3749d470c7
+1. **O&O ShutUp10++**: A free tool to manage Windows privacy settings. Download from [here](https://www.oo-software.com/en/shutup10).
+2. **Debloat Windows using PowerShell**: Run the following command in PowerShell to remove unnecessary apps and features:
+    ```powershell
+    iwr -useb https://git.io/debloat|iex
     ```
-    Modify the value of "Attributes" from `1` to `2`. Data should read `0x00000002 (2)`.
-
-2. **Enable Processor Idle Demote**
-    ```reg
-    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\75b0ae3f-bce0-45a7-8c89-c9611c25e100
+    This script will prompt you with options for de-bloating your system.
+3. **Remove OneDrive**: If you don't need OneDrive, uninstall it using PowerShell:
+    ```powershell
+    winget uninstall Microsoft.OneDrive
     ```
-    Modify the value of "Attributes" from `1` to `2`. Data should read `0x00000002 (2)`.
 
-#### Add New Registry Entries
+---
 
-```reg
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings
+## Obtain IoT Enterprise License
+
+To upgrade your Windows to an IoT Enterprise edition, follow the instructions to obtain a license using [massgrave.dev](https://massgrave.dev/windows_ltsc_links).
+
+1. Visit the website [massgrave.dev](https://massgrave.dev/windows_ltsc_links).
+2. Choose the IoT Enterprise edition of Windows.
+3. Follow the instructions on the page to obtain a valid IoT license key.
+
+This license will give you better control over updates and privacy settings compared to the standard editions of Windows.
+
+---
+
+## Additional Resources
+
+For further customization and optimizations, explore these tools:
+
+- **O&O ShutUp10++**: A free tool to manage Windows privacy settings. Download from [here](https://www.oo-software.com/en/shutup10).
+- **GlassWire**: A network monitoring tool to detect suspicious activity. Get it [here](https://www.glasswire.com).
+  
+---
+
+## Notes
+
+- Keep your system regularly updated for security improvements.
+- Always create restore points before applying significant changes to your system.
+
+---
+
