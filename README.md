@@ -4,21 +4,21 @@
 
 ## 📋 Table of Contents
 
-1. [Initial Setup](#initial-setup)
-2. [Essential Tools](#essential-tools)
-3. [System Tweaks](#system-tweaks)
-4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)
-5. [ROG Laptop Optimization with G-Helper](#rog-laptop-optimization-with-g-helper)
-6. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)
-7. [Additional Resources](#additional-resources)
-8. [Notes](#notes)
-9. [Conclusion](#conclusion)
+1. [Initial Setup](#initial-setup)  
+2. [Essential Tools](#essential-tools)  
+3. [System Tweaks](#system-tweaks)  
+4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)  
+5. [ROG Laptop Optimization with G-Helper](#rog-laptop-optimization-with-g-helper)  
+6. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)  
+7. [Additional Resources](#additional-resources)  
+8. [Notes](#notes)  
+9. [Conclusion](#conclusion)  
 
 ---
 
 ## Initial Setup
 
-1. **Offline Install**: Avoid using an MS account by doing an offline installation. Also use Rufus for easier installation
+1. **Offline Install**: Avoid using an MS account by doing an offline installation. Use **Rufus** for easier installation.
 2. **Update Windows**: Ensure your Windows installation is up to date by checking for updates.
 
 ---
@@ -68,7 +68,7 @@ ROG laptops often come with **Armoury Crate**, which can be resource-heavy and i
    - Control fan speed and monitor CPU/GPU temperatures more efficiently.
 4. **Disable Armoury Crate Services**:
    - Go to `Services.msc` and disable any Armoury Crate-related services to prevent conflicts with G-Helper.
-  
+
 G-Helper offers a lightweight alternative to manage your ROG laptop’s performance without unnecessary overhead.
 
 ---
@@ -89,13 +89,15 @@ For further customization and optimizations, explore these tools:
 
 - **O&O ShutUp10++**: A free tool to manage Windows privacy settings. Download from [here](https://www.oo-software.com/en/shutup10).
 - **GlassWire**: A network monitoring tool to detect suspicious activity. Get it [here](https://www.glasswire.com).
-  
+
 ---
 
 ## Notes
 
-- For the love of God, please keep your stuff upgraded
+- FFS - keep your stuff updates
 
 ---
 
 ## Conclusion
+
+This guide provides the essential steps and tools for setting up your laptop. Customize your system to suit your needs, prioritize privacy, and enjoy a smooth computing experience.
