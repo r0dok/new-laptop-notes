@@ -106,8 +106,8 @@ powercfg /setactive SCHEME_CURRENT
 ## References
 
 ### 📁 Configuration Files
-- [WinAeroTweaker.ini](https://github.com/r0dok/new-laptop-notes/blob/main/References/Winaero%20Tweaker.ini)
-- [Optimizer.zip](references/Optimizer.zip)
+- [WinAeroTweaker.ini](https://github.com/r0dok/new-laptop-notes/blob/main/References/WinaeroTweaker.ini)
+- [Optimizer.zip](References/Optimizer.zip)
 
 ### 🔧 Recommended Settings
 <details>
@@ -118,8 +118,7 @@ powercfg /setactive SCHEME_CURRENT
 ![Optimizer 2](References/Optimizer2.png)
 
 #### Other Tools
-![G-Helper](References/g-helper-settings.png)
-![Winaero](References/WinAeroTweaker-settings.png)
+![G-Helper](References/GHelper1.png)
 </details>
 
 ---
