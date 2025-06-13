@@ -38,20 +38,20 @@
 ### 1. Performance & System Tools
 - **G-Helper** ([Download](https://github.com/seerge/g-helper))
   > Replaces Armoury Crate - lighter, better performance control
-  ![G-Helper Settings](References/g-helper-settings.png)
+  ![G-Helper Settings](References/GHelper1.png)
 
 - **Nvidia Drivers** ([Download](https://www.nvidia.com/Download/index.aspx))
   > Latest Studio drivers recommended
 
 ### 2. System Optimization
 - **Winaero Tweaker** ([Download](https://winaero.com/winaero-tweaker/))
-  > My settings: [references/WinAeroTweaker.ini](References/WinAeroTweaker.ini)
+  > My settings: [references/WinAeroTweaker.ini](References/WinaeroTweaker.ini)
 
 - **Optimizer** ([Download](https://github.com/hellzerg/optimizer/releases))
   <details>
   <summary>View recommended settings</summary>
   
-  ![Settings 1](References/Optimizer1.png)
+  ![Settings 1](ReferencesOptimizer1.png)
   ![Settings 2](References/Optimizer2.png)
   </details>
 
@@ -66,7 +66,7 @@ powercfg -attributes SUB_PROCESSOR 893dee8e-2bef-41e0-89c6-b55d0929964c -ATTRIB_
 powercfg -attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE
 
 # Set optimal power states
-powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 1
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 99
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 0
 powercfg /setactive SCHEME_CURRENT
@@ -106,7 +106,7 @@ powercfg /setactive SCHEME_CURRENT
 ## References
 
 ### 📁 Configuration Files
-- [WinAeroTweaker.ini](references/WinAeroTweaker.ini)
+- [WinAeroTweaker.ini](https://github.com/r0dok/new-laptop-notes/blob/main/References/Winaero%20Tweaker.ini)
 - [Optimizer.zip](references/Optimizer.zip)
 
 ### 🔧 Recommended Settings
@@ -114,13 +114,12 @@ powercfg /setactive SCHEME_CURRENT
 <summary>View all screenshots</summary>
 
 #### Optimizer Settings
-![Optimizer 1](references/Optimizer1.png)
-![Optimizer 2](references/Optimizer2.png)
-![Optimizer 3](references/Optimizer3.png)
+![Optimizer 1](References/Optimizer1.png)
+![Optimizer 2](References/Optimizer2.png)
 
 #### Other Tools
-![G-Helper](references/g-helper-settings.png)
-![Winaero](references/WinAeroTweaker-settings.png)
+![G-Helper](References/g-helper-settings.png)
+![Winaero](References/WinAeroTweaker-settings.png)
 </details>
 
 ---
