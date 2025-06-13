@@ -38,23 +38,21 @@
 ### 1. Performance & System Tools
 - **G-Helper** ([Download](https://github.com/seerge/g-helper))
   > Replaces Armoury Crate - lighter, better performance control
-  ![G-Helper Settings](references/g-helper-settings.png)
+  ![G-Helper Settings](References/g-helper-settings.png)
 
 - **Nvidia Drivers** ([Download](https://www.nvidia.com/Download/index.aspx))
   > Latest Studio drivers recommended
 
 ### 2. System Optimization
 - **Winaero Tweaker** ([Download](https://winaero.com/winaero-tweaker/))
-  > My settings: [references/WinAeroTweaker.ini](references/WinAeroTweaker.ini)
-  ![Winaero Settings](references/WinAeroTweaker-settings.png)
+  > My settings: [references/WinAeroTweaker.ini](References/WinAeroTweaker.ini)
 
 - **Optimizer** ([Download](https://github.com/hellzerg/optimizer/releases))
   <details>
   <summary>View recommended settings</summary>
   
-  ![Settings 1](references/Optimizer1.png)
-  ![Settings 2](references/Optimizer2.png)
-  ![Settings 3](references/Optimizer3.png)
+  ![Settings 1](References/Optimizer1.png)
+  ![Settings 2](References/Optimizer2.png)
   </details>
 
 ---
