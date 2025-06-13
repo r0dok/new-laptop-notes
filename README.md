@@ -19,8 +19,35 @@
 
 ## Initial Setup
 
-1. **Offline Install**: Avoid using an MS account by doing an offline installation. Use **Rufus** for easier installation.
-2. **Update Windows**: Ensure your Windows installation is up to date by checking for updates.
+### Create a Windows Installer (IoT LTSC via massgrave & Rufus)
+
+1. **Download Windows IoT LTSC ISO**:  
+   - Go to [massgrave.dev/windows_ltsc_links](https://massgrave.dev/windows_ltsc_links).
+   - Download the latest Windows 10/11 IoT Enterprise LTSC ISO.
+
+2. **Download Rufus**:  
+   - Get Rufus from [rufus.ie](https://rufus.ie/).
+
+3. **Prepare a USB Drive**:  
+   - Insert a USB drive (at least 8GB).
+
+4. **Create Bootable USB**:  
+   - Open Rufus.
+   - Select your USB drive.
+   - Select the downloaded IoT LTSC ISO.
+   - Choose "GPT" for partition scheme (for most modern laptops).
+   - Click "Start" and wait for completion.
+
+5. **Boot from USB**:  
+   - Insert the USB into your laptop.
+   - Power on and enter the boot menu (usually by pressing `Esc`, `F2`, or `F12`).
+   - Select the USB drive to start Windows installation.
+
+6. **Offline Install**:  
+   - During setup, choose "Offline Account" or "Limited Experience" to avoid using a Microsoft account.
+
+7. **Update Windows**:  
+   - Once installed, ensure your Windows installation is up to date by checking for updates.
 
 ---
 
@@ -30,7 +57,6 @@
 2. **Winaero Tweaker**: A powerful tool to customize and tweak Windows. Download from [here](https://winaero.com/winaero-tweaker/).
 3. **Optimizer**: A comprehensive tool to enhance performance and privacy. Get it from [Optimizer](https://github.com/hellzerg/optimizer/releases).
 4. **WPD (Windows Privacy Dashboard)**: Use WPD to control Windows privacy settings. Available at [WPD](https://wpd.app).
-5. **GlassWire**: A network monitoring tool to detect suspicious activity. Get it [here](https://www.glasswire.com).
 
 ---
 
@@ -41,7 +67,7 @@
 
 ---
 
-## Advanced Power Tweaks for Zephyrus G14 (2021, R9 + 3060)
+## Advanced Power Tweaks for Zephyrus G14 (mine is 2021, R9 + 3060)
 
 Fine-tune your laptop’s power and thermal behavior for better battery life, lower temps, or maximum performance.
 
@@ -80,13 +106,12 @@ You can create multiple power plans (e.g., "Silent", "Performance") and switch a
 
 To remove bloatware and enhance privacy, use the following tools:
 
-1. **O&O ShutUp10++**: A free tool to manage Windows privacy settings. Download from [here](https://www.oo-software.com/en/shutup10).
-2. **Debloat Windows using PowerShell**: Run the following command in PowerShell to remove unnecessary apps and features:
+1. **Debloat Windows using PowerShell**: Run the following command in PowerShell to remove unnecessary apps and features:
     ```powershell
     iwr -useb https://git.io/debloat|iex
     ```
     This script will prompt you with options for de-bloating your system.
-3. **Remove OneDrive**: If you don't need OneDrive, uninstall it using PowerShell:
+2. **Remove OneDrive**: If you don't need OneDrive, uninstall it using PowerShell:
     ```powershell
     winget uninstall Microsoft.OneDrive
     ```
@@ -100,31 +125,12 @@ ROG laptops often come with **Armoury Crate**, which can be resource-heavy and i
 1. **Download G-Helper**: Get it from the [official G-Helper GitHub page](https://github.com/seerge/g-helper).
 2. **Install G-Helper**: Follow the instructions on the GitHub page to replace Armoury Crate and take control of your laptop’s performance settings.
 3. **Optimize Performance Profiles**:
-   - Use G-Helper to switch between performance, balanced, and silent modes.
+   - Use G-Helper to switch between performance, balanced, and silent modes (I run always balanced + optimized).
    - Control fan speed and monitor CPU/GPU temperatures more efficiently.
 4. **Disable Armoury Crate Services**:
    - Go to `Services.msc` and disable any Armoury Crate-related services to prevent conflicts with G-Helper.
 
 G-Helper offers a lightweight alternative to manage your ROG laptop’s performance without unnecessary overhead.
-
----
-
-## Obtain IoT Enterprise License
-
-To upgrade your Windows to an IoT Enterprise edition, follow the instructions to obtain a license using [massgrave.dev](https://massgrave.dev/windows_ltsc_links).
-
-1. Visit the website [massgrave.dev](https://massgrave.dev/windows_ltsc_links).
-2. Choose the IoT Enterprise edition of Windows.
-3. Follow the instructions on the page to obtain a valid IoT license key.
-
----
-
-## Additional Resources
-
-For further customization and optimizations, explore these tools:
-
-- **O&O ShutUp10++**: A free tool to manage Windows privacy settings. Download from [here](https://www.oo-software.com/en/shutup10).
-- **GlassWire**: A network monitoring tool to detect suspicious activity. Get it [here](https://www.glasswire.com).
 
 ---
 
