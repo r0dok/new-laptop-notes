@@ -7,12 +7,13 @@
 1. [Initial Setup](#initial-setup)  
 2. [Essential Tools](#essential-tools)  
 3. [System Tweaks](#system-tweaks)  
-4. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)  
-5. [ROG Laptop Optimization with G-Helper](#rog-laptop-optimization-with-g-helper)  
-6. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)  
-7. [Additional Resources](#additional-resources)  
-8. [Notes](#notes)  
-9. [Conclusion](#conclusion)  
+4. [Advanced Power Tweaks for Zephyrus G14](#advanced-power-tweaks-for-zephyrus-g14-2021-r9--3060)  
+5. [De-bloat and Privacy Tools](#de-bloat-and-privacy-tools)  
+6. [ROG Laptop Optimization with G-Helper](#rog-laptop-optimization-with-g-helper)  
+7. [Obtain IoT Enterprise License](#obtain-iot-enterprise-license)  
+8. [Additional Resources](#additional-resources)  
+9. [Notes](#notes)  
+10. [Conclusion](#conclusion)  
 
 ---
 
@@ -37,6 +38,41 @@
 
 1. **Adjust Power Settings**: Modify power plans for performance or battery longevity.
 2. **Remove Unnecessary Startup Items**: Disable startup programs via `Task Manager > Startup` for a faster boot.
+
+---
+
+## Advanced Power Tweaks for Zephyrus G14 (2021, R9 + 3060)
+
+Fine-tune your laptop’s power and thermal behavior for better battery life, lower temps, or maximum performance.
+
+### Show Advanced Processor Power Options
+
+Open PowerShell as Administrator and run:
+```powershell
+powercfg -attributes SUB_PROCESSOR 893dee8e-2bef-41e0-89c6-b55d0929964c -ATTRIB_HIDE
+powercfg -attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE
+```
+This reveals **Minimum/Maximum processor state** and **Processor performance boost mode** in your power plan’s advanced settings.
+
+### Set Minimal/Maximum Processor Power State
+
+To set minimum to 5% and maximum to 99% (which also disables boost):
+```powershell
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 99
+powercfg /setactive SCHEME_CURRENT
+```
+
+### Disable CPU Boost (for lower temps and noise)
+
+To fully disable CPU boost:
+```powershell
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 0
+powercfg /setactive SCHEME_CURRENT
+```
+- **0 = Disabled**, **1 = Enabled**, **2 = Aggressive**, **3 = Efficient Enabled**, **4 = Efficient Aggressive**
+
+You can create multiple power plans (e.g., "Silent", "Performance") and switch as needed.
 
 ---
 
@@ -97,7 +133,3 @@ For further customization and optimizations, explore these tools:
 - FFS - keep your stuff updates
 
 ---
-
-## Conclusion
-
-This guide provides the essential steps and tools for setting up your laptop. Customize your system to suit your needs, prioritize privacy, and enjoy a smooth computing experience.
