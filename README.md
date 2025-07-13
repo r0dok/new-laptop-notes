@@ -125,3 +125,4 @@ powercfg /setactive SCHEME_CURRENT
 
 ## Notes
 - Keep all software updated, FFS
+- Disable mouse accel.
