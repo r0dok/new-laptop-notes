@@ -3,17 +3,19 @@
 
 ## 📋 Table of Contents
 1. [Initial Setup](#initial-setup)
-2. [Essential Tools](#essential-tools)
-3. [System & Power Tweaks](#system--power-tweaks)
-4. [ROG Laptop Optimization](#rog-laptop-optimization)
-5. [Privacy & De-bloating](#privacy--de-bloating)
-6. [References](#references)
+2. [Installing Store Apps](#installing-store-apps)
+3. [Essential Tools](#essential-tools)
+4. [System & Power Tweaks](#system--power-tweaks)
+5. [ROG Laptop Optimization](#rog-laptop-optimization)
+6. [Privacy & De-bloating](#privacy--de-bloating)
+7. [References](#references)
 
 ---
 
 ## Initial Setup
 
 ### Windows IoT LTSC Installation
+
 1. **Download Required Tools**
    - Get Windows IoT LTSC ISO from [massgrave.dev/windows_ltsc_links](https://massgrave.dev/windows_ltsc_links) (Windows 10 bcs F U Microsoft)
    - Download Rufus from [rufus.ie](https://rufus.ie/)
@@ -33,9 +35,34 @@
 
 ---
 
+## Installing Store Apps
+
+LTSC editions do not come with store apps pre-installed. To install them, follow the steps below.
+
+* Make sure the Internet is connected.
+* Open Powershell as admin and enter, `wsreset -i`
+* Wait for a notification to appear that the store app is installed, it may take a few minutes.
+
+On Windows 10 2021 LTSC, you might encounter an error indicating that cliprenew.exe cannot be found. This error can be safely ignored.
+
+**App Installer**
+
+This app is very useful; it includes WinGet, enabling easy installation of .appx packages. After installing the Store app, install the App installer from this URL.
+
+https://apps.microsoft.com/detail/9nblggh4nns1
+
+**It didn't work. What should I do next?**
+
+You can install them using the package provided by abbodi1406.
+
+https://github.com/stdin82/htfx/releases/tag/v0.0.24
+
+---
+
 ## Essential Tools
 
 ### 1. Performance & System Tools
+
 - **G-Helper** ([Download](https://github.com/seerge/g-helper))
   > Replaces Armoury Crate - lighter, better performance control
   ![G-Helper Settings](References/GHelper1.png)
@@ -44,6 +71,7 @@
   > Latest Studio drivers recommended
 
 ### 2. System Optimization
+
 - **Winaero Tweaker** ([Download](https://winaero.com/winaero-tweaker/))
   > My settings: [references/WinAeroTweaker.ini](References/WinaeroTweaker.ini)
 
@@ -60,6 +88,7 @@
 ## System & Power Tweaks
 
 ### Advanced Power Management
+
 ```powershell
 # Show hidden power options
 powercfg -attributes SUB_PROCESSOR 893dee8e-2bef-41e0-89c6-b55d0929964c -ATTRIB_HIDE
@@ -73,6 +102,7 @@ powercfg /setactive SCHEME_CURRENT
 ```
 
 ### Performance Modes
+
 - **0** = Disabled (Best for thermals, what I use)
 - **1** = Enabled
 - **2** = Aggressive
@@ -96,7 +126,7 @@ powercfg /setactive SCHEME_CURRENT
    ```powershell
    # Remove OneDrive
    winget uninstall Microsoft.OneDrive
-
+   
    # Run de-bloat script
    iwr -useb https://git.io/debloat|iex
    ```
@@ -124,5 +154,6 @@ powercfg /setactive SCHEME_CURRENT
 ---
 
 ## Notes
+
 - Keep all software updated, FFS
 - Disable mouse accel.
