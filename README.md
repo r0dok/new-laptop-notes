@@ -1,159 +1,477 @@
-# 🖥️ New Laptop Setup Guide
-> Optimization guide for Zephyrus G14 (2021, R9 + 3060)
+# 🖥️ Windows Optimization Guide
+> Advanced optimization for ASUS Zephyrus G14 (2021, R9 5900HS + RTX 3060)
 
 ## 📋 Table of Contents
-1. [Initial Setup](#initial-setup)
-2. [Installing Store Apps](#installing-store-apps)
-3. [Essential Tools](#essential-tools)
-4. [System & Power Tweaks](#system--power-tweaks)
-5. [ROG Laptop Optimization](#rog-laptop-optimization)
-6. [Privacy & De-bloating](#privacy--de-bloating)
-7. [References](#references)
+1. [Store Apps on LTSC](#store-apps-on-ltsc)
+2. [Advanced Power Management](#advanced-power-management)
+3. [ROG Hardware Optimization](#rog-hardware-optimization)
+4. [System Tweaks](#system-tweaks)
+5. [Performance Validation](#performance-validation)
+6. [Configuration Files](#configuration-files)
 
 ---
 
-## Initial Setup
+## Store Apps on LTSC
 
-### Windows IoT LTSC Installation
-
-1. **Download Required Tools**
-   - Get Windows IoT LTSC ISO from [massgrave.dev/windows_ltsc_links](https://massgrave.dev/windows_ltsc_links) (Windows 10 bcs F U Microsoft)
-   - Download Rufus from [rufus.ie](https://rufus.ie/)
-
-2. **Create Installation Media**
-   - Insert USB drive (8GB+)
-   - Open Rufus
-   - Select USB and IoT LTSC ISO
-   - Choose GPT partition scheme
-   - Click Start
-
-3. **Install Windows**
-   - Boot from USB (usually `F2` or `Esc`)
-   - Choose "Offline Account" during setup
-   - Complete installation
-   - Update Windows
-
----
-
-## Installing Store Apps
-
-LTSC editions do not come with store apps pre-installed. To install them, follow the steps below.
-
-* Make sure the Internet is connected.
-* Open Powershell as admin and enter, `wsreset -i`
-* Wait for a notification to appear that the store app is installed, it may take a few minutes.
-
-On Windows 10 2021 LTSC, you might encounter an error indicating that cliprenew.exe cannot be found. This error can be safely ignored.
-
-**App Installer**
-
-This app is very useful; it includes WinGet, enabling easy installation of .appx packages. After installing the Store app, install the App installer from this URL.
-
-https://apps.microsoft.com/detail/9nblggh4nns1
-
-**It didn't work. What should I do next?**
-
-You can install them using the package provided by abbodi1406.
-
-https://github.com/stdin82/htfx/releases/tag/v0.0.24
-
----
-
-## Essential Tools
-
-### 1. Performance & System Tools
-
-- **G-Helper** ([Download](https://github.com/seerge/g-helper))
-  > Replaces Armoury Crate - lighter, better performance control
-  ![G-Helper Settings](References/GHelper1.png)
-
-- **Nvidia Drivers** ([Download](https://www.nvidia.com/Download/index.aspx))
-  > Latest Studio drivers recommended
-
-### 2. System Optimization
-
-- **Winaero Tweaker** ([Download](https://winaero.com/winaero-tweaker/))
-  > My settings: [references/WinAeroTweaker.ini](References/WinaeroTweaker.ini)
-
-- **Optimizer** ([Download](https://github.com/hellzerg/optimizer/releases))
-  <details>
-  <summary>View recommended settings</summary>
-  
-  ![Settings 1](ReferencesOptimizer1.png)
-  ![Settings 2](References/Optimizer2.png)
-  </details>
-
----
-
-## System & Power Tweaks
-
-### Advanced Power Management
-
+### PowerShell Method
 ```powershell
-# Show hidden power options
-powercfg -attributes SUB_PROCESSOR 893dee8e-2bef-41e0-89c6-b55d0929964c -ATTRIB_HIDE
-powercfg -attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE
+# Run as Administrator
+wsreset -i
+```
+**Note**: On Windows 10 2021 LTSC, cliprenew.exe errors can be ignored.
 
-# Set optimal power states
+### App Installer (WinGet)
+Essential for package management. Install from:
+```
+https://apps.microsoft.com/detail/9nblggh4nns1
+```
+
+### Fallback Method
+If PowerShell fails, use community package:
+```
+https://github.com/stdin82/htfx/releases/tag/v0.0.24
+```
+
+---
+
+## Advanced Power Management
+
+### Unlock Hidden Power Options
+```powershell
+# Expose CPU performance boost mode
+powercfg -attributes SUB_PROCESSOR 893dee8e-2bef-41e0-89c6-b55d0929964c -ATTRIB_HIDE
+
+# Expose processor performance core parking min cores
+powercfg -attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE
+```
+
+### Optimal Performance Settings
+```powershell
+# Set minimum processor state to 1% (allows deeper C-states)
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 1
+
+# Cap maximum processor state at 99% (prevents boost clock instability)
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 99
+
+# Disable CPU performance boost (reduces heat and improves consistency)
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 0
+
+# Apply changes
 powercfg /setactive SCHEME_CURRENT
 ```
 
-### Performance Modes
-
-- **0** = Disabled (Best for thermals, what I use)
-- **1** = Enabled
-- **2** = Aggressive
+### Performance Boost Mode Values
+- **0** = Disabled (Best thermals, recommended for G14)
+- **1** = Enabled (Default)
+- **2** = Aggressive (High performance, high heat)
 - **3** = Efficient Enabled
 - **4** = Efficient Aggressive
 
 ---
 
-## ROG Laptop Optimization
+## ROG Hardware Optimization
 
-1. **Remove Armoury Crate**
-   - Uninstall via Settings
-   - Disable services in `services.msc`
+### Remove Armoury Crate Completely
+```powershell
+# Uninstall Armoury Crate components
+Get-AppxPackage *ArmouryCrate* | Remove-AppxPackage
+Get-AppxPackage *ROG* | Remove-AppxPackage
 
-2. **Install G-Helper**
-   - Download from GitHub
-   - Run in balanced mode
-   - Enable optimizations
+# Stop and disable services
+Stop-Service "ArmouryCrateService" -Force
+Set-Service "ArmouryCrateService" -StartupType Disabled
+Stop-Service "ArmouryCrateControlInterface" -Force  
+Set-Service "ArmouryCrateControlInterface" -StartupType Disabled
+```
 
-3. **System Cleanup**
-   ```powershell
-   # Remove OneDrive
-   winget uninstall Microsoft.OneDrive
-   
-   # Run de-bloat script
-   iwr -useb https://git.io/debloat|iex
-   ```
+### G-Helper Configuration
+Download: [github.com/seerge/g-helper](https://github.com/seerge/g-helper)
+
+![G-Helper Settings](References/GHelper1.png)
+
+**Recommended Settings**:
+- Performance Mode: **Balanced**
+- CPU Boost: **Efficient** (Mode 3)
+- GPU Mode: **Eco** (for battery) / **Standard** (plugged in)
+- Screen refresh: **60Hz** (battery) / **144Hz** (plugged in)
+
+### NVIDIA Driver Optimization
+```powershell
+# Install only driver, skip GeForce Experience
+# Use Studio drivers for stability over Game Ready
+```
+
+**NVIDIA Control Panel Settings**:
+- Power Management: **Prefer Maximum Performance** (when plugged in)
+- Texture Filtering - Quality: **High Performance**
+- Threaded Optimization: **On**
 
 ---
 
-## References
+## System Tweaks
 
-### 📁 Configuration Files
-- [WinAeroTweaker.ini](https://github.com/r0dok/new-laptop-notes/blob/main/References/WinaeroTweaker.ini)
-- [Optimizer.zip](References/Optimizer.zip)
+### Essential Registry Modifications
+```powershell
+# Disable Windows Defender real-time protection (if using alternative)
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name "DisableRealtimeMonitoring" -Value 1
 
-### 🔧 Recommended Settings
+# Disable mouse acceleration
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Value "0"
+
+# Disable fullscreen optimizations globally
+Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehavior" -Value "2"
+```
+
+### Advanced System Cleanup
+```powershell
+# Remove OneDrive completely
+winget uninstall Microsoft.OneDrive
+Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+
+# Run comprehensive debloat script
+iwr -useb https://git.io/debloat | iex
+```
+
+### Winaero Tweaker Optimization
+Download: [winaero.com/winaero-tweaker/](https://winaero.com/winaero-tweaker/)
+
+**Configuration File**: [References/WinaeroTweaker.ini](References/WinaeroTweaker.ini)
+
+Key Settings:
+```ini
+# Critical optimizations from WinaeroTweaker.ini
+UnwantedAppsDisabled=1
+FileExplorerAdsDisabled=1  
+LockScreenAdsDisabled=1
+StartSuggestionsDisabled=1
+TipsAboutWindowsDisabled=1
+WelcomePageDisabled=1
+SettingsAdsDisabled=1
+```
+
+### Optimizer Tool
+Download: [github.com/hellzerg/optimizer/releases](https://github.com/hellzerg/optimizer/releases)
+
 <details>
-<summary>View all screenshots</summary>
+<summary>View recommended settings</summary>
 
-#### Optimizer Settings
-![Optimizer 1](References/Optimizer1.png)
-![Optimizer 2](References/Optimizer2.png)
+![Optimizer Settings 1](References/Optimizer1.png)
+![Optimizer Settings 2](References/Optimizer2.png)
 
-#### Other Tools
-![G-Helper](References/GHelper1.png)
+**Configuration Package**: [References/Optimizer.zip](References/Optimizer.zip)
 </details>
 
 ---
 
-## Notes
+## Performance Validation
 
-- Keep all software updated, FFS
-- Disable mouse accel.
+### CPU Performance Check
+```powershell
+# Verify power plan settings
+powercfg /query SCHEME_CURRENT SUB_PROCESSOR
+
+# Check CPU boost mode
+powercfg /query SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE
+```
+
+### Thermal Monitoring
+- **HWiNFO64**: Monitor CPU/GPU temps under load
+- **Target temps**: CPU <85°C, GPU <80°C during gaming
+- **Fan curves**: Custom curves via G-Helper for optimal noise/performance
+
+### Memory Optimization
+```powershell
+# Enable XMP/DOCP in BIOS for rated RAM speeds
+# Verify RAM is running at rated speed (3200MHz for G14 2021)
+```
+
+---
+
+## Configuration Files
+
+### Reference Materials
+All configuration files and screenshots are available in the `References/` folder:
+
+#### Configuration Files
+- **[WinaeroTweaker.ini](References/WinaeroTweaker.ini)** - Complete Winaero Tweaker settings
+- **[Optimizer.zip](References/Optimizer.zip)** - Pre-configured Optimizer settings
+
+#### Visual Guides
+- **[GHelper1.png](References/GHelper1.png)** - G-Helper recommended configuration
+- **[Optimizer1.png](References/Optimizer1.png)** - Optimizer settings page 1
+- **[Optimizer2.png](References/Optimizer2.png)** - Optimizer settings page 2
+
+### Power Plan Export
+```powershell
+# Export optimized power plan
+powercfg /export "G14_Optimized.pow"
+```
+
+### Startup Optimization
+```powershell
+# Disable unnecessary startup programs
+Get-CimInstance Win32_StartupCommand | Where-Object {$_.Name -like "*Adobe*" -or $_.Name -like "*Steam*"} | ForEach-Object {
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name $_.Name -Value $null
+}
+```
+
+### G-Helper Auto-start
+- Add G-Helper to startup programs
+- Set to start minimized to system tray
+- Enable "Matrix display" auto-off to save battery
+
+---
+
+## Advanced Notes
+
+- **Memory**: Enable XMP Profile 1 in BIOS for optimal RAM performance
+- **Storage**: Enable TRIM for SSDs, disable indexing on game drives
+- **Network**: Disable "Allow the computer to turn off this device" for network adapters
+- **Display**: Use 144Hz only when plugged in to preserve battery life
+- **Audio**: ROG G14 benefits from EqualizerAPO with custom profiles for better audio
+
+### Critical Don'ts
+- Don't disable Windows Update completely (security risk)
+- Don't set CPU max to 100% (causes thermal throttling)
+- Don't use aggressive CPU boost modes (Mode 2/4) without adequate cooling
+- Don't disable all telemetry (breaks some Windows features)# 🖥️ Windows Optimization Guide
+> Advanced optimization for ASUS Zephyrus G14 (2021, R9 5900HS + RTX 3060)
+
+## 📋 Table of Contents
+1. [Store Apps on LTSC](#store-apps-on-ltsc)
+2. [Advanced Power Management](#advanced-power-management)
+3. [ROG Hardware Optimization](#rog-hardware-optimization)
+4. [System Tweaks](#system-tweaks)
+5. [Performance Validation](#performance-validation)
+6. [Configuration Files](#configuration-files)
+
+---
+
+## Store Apps on LTSC
+
+### PowerShell Method
+```powershell
+# Run as Administrator
+wsreset -i
+```
+**Note**: On Windows 10 2021 LTSC, cliprenew.exe errors can be ignored.
+
+### App Installer (WinGet)
+Essential for package management. Install from:
+```
+https://apps.microsoft.com/detail/9nblggh4nns1
+```
+
+### Fallback Method
+If PowerShell fails, use community package:
+```
+https://github.com/stdin82/htfx/releases/tag/v0.0.24
+```
+
+---
+
+## Advanced Power Management
+
+### Unlock Hidden Power Options
+```powershell
+# Expose CPU performance boost mode
+powercfg -attributes SUB_PROCESSOR 893dee8e-2bef-41e0-89c6-b55d0929964c -ATTRIB_HIDE
+
+# Expose processor performance core parking min cores
+powercfg -attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE
+```
+
+### Optimal Performance Settings
+```powershell
+# Set minimum processor state to 1% (allows deeper C-states)
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 1
+
+# Cap maximum processor state at 99% (prevents boost clock instability)
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 99
+
+# Disable CPU performance boost (reduces heat and improves consistency)
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 0
+
+# Apply changes
+powercfg /setactive SCHEME_CURRENT
+```
+
+### Performance Boost Mode Values
+- **0** = Disabled (Best thermals, recommended for G14)
+- **1** = Enabled (Default)
+- **2** = Aggressive (High performance, high heat)
+- **3** = Efficient Enabled
+- **4** = Efficient Aggressive
+
+---
+
+## ROG Hardware Optimization
+
+### Remove Armoury Crate Completely
+```powershell
+# Uninstall Armoury Crate components
+Get-AppxPackage *ArmouryCrate* | Remove-AppxPackage
+Get-AppxPackage *ROG* | Remove-AppxPackage
+
+# Stop and disable services
+Stop-Service "ArmouryCrateService" -Force
+Set-Service "ArmouryCrateService" -StartupType Disabled
+Stop-Service "ArmouryCrateControlInterface" -Force  
+Set-Service "ArmouryCrateControlInterface" -StartupType Disabled
+```
+
+### G-Helper Configuration
+Download: [github.com/seerge/g-helper](https://github.com/seerge/g-helper)
+
+![G-Helper Settings](References/GHelper1.png)
+
+**Recommended Settings**:
+- Performance Mode: **Balanced**
+- CPU Boost: **Efficient** (Mode 3)
+- GPU Mode: **Eco** (for battery) / **Standard** (plugged in)
+- Screen refresh: **60Hz** (battery) / **144Hz** (plugged in)
+
+### NVIDIA Driver Optimization
+```powershell
+# Install only driver, skip GeForce Experience
+# Use Studio drivers for stability over Game Ready
+```
+
+**NVIDIA Control Panel Settings**:
+- Power Management: **Prefer Maximum Performance** (when plugged in)
+- Texture Filtering - Quality: **High Performance**
+- Threaded Optimization: **On**
+
+---
+
+## System Tweaks
+
+### Essential Registry Modifications
+```powershell
+# Disable Windows Defender real-time protection (if using alternative)
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name "DisableRealtimeMonitoring" -Value 1
+
+# Disable mouse acceleration
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseSpeed" -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold1" -Value "0"
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name "MouseThreshold2" -Value "0"
+
+# Disable fullscreen optimizations globally
+Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehavior" -Value "2"
+```
+
+### Advanced System Cleanup
+```powershell
+# Remove OneDrive completely
+winget uninstall Microsoft.OneDrive
+Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+
+# Run comprehensive debloat script
+iwr -useb https://git.io/debloat | iex
+```
+
+### Winaero Tweaker Optimization
+Download: [winaero.com/winaero-tweaker/](https://winaero.com/winaero-tweaker/)
+
+**Configuration File**: [References/WinaeroTweaker.ini](References/WinaeroTweaker.ini)
+
+Key Settings:
+```ini
+# Critical optimizations from WinaeroTweaker.ini
+UnwantedAppsDisabled=1
+FileExplorerAdsDisabled=1  
+LockScreenAdsDisabled=1
+StartSuggestionsDisabled=1
+TipsAboutWindowsDisabled=1
+WelcomePageDisabled=1
+SettingsAdsDisabled=1
+```
+
+### Optimizer Tool
+Download: [github.com/hellzerg/optimizer/releases](https://github.com/hellzerg/optimizer/releases)
+
+<details>
+<summary>View recommended settings</summary>
+
+![Optimizer Settings 1](References/Optimizer1.png)
+![Optimizer Settings 2](References/Optimizer2.png)
+
+**Configuration Package**: [References/Optimizer.zip](References/Optimizer.zip)
+</details>
+
+---
+
+## Performance Validation
+
+### CPU Performance Check
+```powershell
+# Verify power plan settings
+powercfg /query SCHEME_CURRENT SUB_PROCESSOR
+
+# Check CPU boost mode
+powercfg /query SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE
+```
+
+### Thermal Monitoring
+- **HWiNFO64**: Monitor CPU/GPU temps under load
+- **Target temps**: CPU <85°C, GPU <80°C during gaming
+- **Fan curves**: Custom curves via G-Helper for optimal noise/performance
+
+### Memory Optimization
+```powershell
+# Enable XMP/DOCP in BIOS for rated RAM speeds
+# Verify RAM is running at rated speed (3200MHz for G14 2021)
+```
+
+---
+
+## Configuration Files
+
+### Reference Materials
+All configuration files and screenshots are available in the `References/` folder:
+
+#### Configuration Files
+- **[WinaeroTweaker.ini](References/WinaeroTweaker.ini)** - Complete Winaero Tweaker settings
+- **[Optimizer.zip](References/Optimizer.zip)** - Pre-configured Optimizer settings
+
+#### Visual Guides
+- **[GHelper1.png](References/GHelper1.png)** - G-Helper recommended configuration
+- **[Optimizer1.png](References/Optimizer1.png)** - Optimizer settings page 1
+- **[Optimizer2.png](References/Optimizer2.png)** - Optimizer settings page 2
+
+### Power Plan Export
+```powershell
+# Export optimized power plan
+powercfg /export "G14_Optimized.pow"
+```
+
+### Startup Optimization
+```powershell
+# Disable unnecessary startup programs
+Get-CimInstance Win32_StartupCommand | Where-Object {$_.Name -like "*Adobe*" -or $_.Name -like "*Steam*"} | ForEach-Object {
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name $_.Name -Value $null
+}
+```
+
+### G-Helper Auto-start
+- Add G-Helper to startup programs
+- Set to start minimized to system tray
+- Enable "Matrix display" auto-off to save battery
+
+---
+
+## Advanced Notes
+
+- **Memory**: Enable XMP Profile 1 in BIOS for optimal RAM performance
+- **Storage**: Enable TRIM for SSDs, disable indexing on game drives
+- **Network**: Disable "Allow the computer to turn off this device" for network adapters
+- **Display**: Use 144Hz only when plugged in to preserve battery life
+- **Audio**: ROG G14 benefits from EqualizerAPO with custom profiles for better audio
+
+### Critical Don'ts
+- Don't disable Windows Update completely (security risk)
+- Don't set CPU max to 100% (causes thermal throttling)
+- Don't use aggressive CPU boost modes (Mode 2/4) without adequate cooling
+- Don't disable all telemetry (breaks some Windows features)
